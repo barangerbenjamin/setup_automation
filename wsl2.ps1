@@ -20,11 +20,15 @@ $version = [int]$version
 $proceed = $FALSE
 
 # Checking $version and $edition
-if($version -gt 18917 -And $edition -eq "Edition : Professional") {
+if($version -ge 18917 -And $edition -eq "Edition : Professional") {
     Write-Host "Current OS build is high enough, proceeding with installation..."
     $proceed = $TRUE
 }else {
-    Write-Host "Your current OS build is"$version", it should be minimum 18917. Please sign-up to the Windows Insider program at https://insider.windows.com/en-us/ and install all the latest updates. Finally run this script again."
+    if($version -ge 18917) {
+        Write=Host "You're currently not running Windows Professional Edition, please upgrade."
+    }else {
+        Write-Host "Your current OS build is"$version", it should be minimum 18917. Please sign-up to the Windows Insider program at https://insider.windows.com/en-us/ and install all the latest updates. Finally run this script again."
+    }
 }
 
 if($proceed) {
